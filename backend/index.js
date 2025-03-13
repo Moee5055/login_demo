@@ -21,11 +21,11 @@ app.use(cors());
 })();
 
 app.post('/api/login', async (req, res) => {
-  const { username, password } = req.body;
+  const { number, password } = req.body;
   try {
     await prisma.user.create({
       data: {
-        username,
+        number,
         password,
       },
     });

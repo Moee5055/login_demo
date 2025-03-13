@@ -1,14 +1,34 @@
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 
+const url = 'http://localhost:3000/api/login';
+
 function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Handle login logic here
-    toast.success('Login successfull');
+    const body = {
+      number: email,
+      password: password,
+    };
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      });
+      if (!response) throw new Error('something went wrong');
+      setEmail('');
+      setPassword('');
+      toast.success('Login successfull');
+    } catch (error) {
+      console.log('error:', error);
+    }
   };
 
   return (
