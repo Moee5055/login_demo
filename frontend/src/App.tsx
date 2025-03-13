@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 
-const url = 'http://localhost:3000/api/login';
+const url = import.meta.env.VITE_API_URL;
 
 function App() {
   const [email, setEmail] = useState('');
@@ -15,7 +15,7 @@ function App() {
       password: password,
     };
     try {
-      const response = await fetch(url, {
+      const response = await fetch(`${url}/api/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
