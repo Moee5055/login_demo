@@ -3,6 +3,22 @@ import toast from 'react-hot-toast';
 
 const url = import.meta.env.VITE_API_URL;
 
+const handlelogin = async (body: { username: string; password: string }) => {
+  try {
+    const response = await fetch(`${url}/api/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
+    if (!response) throw new Error('something went wrong');
+    return await response.json();
+  } catch (error) {
+    console.log('error:', error);
+  }
+};
+
 function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,21 +30,18 @@ function App() {
       username: email,
       password: password,
     };
-    try {
-      const response = await fetch(`${url}/api/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-      });
-      if (!response) throw new Error('something went wrong');
-      setEmail('');
-      setPassword('');
-      toast.success('Login successfull');
-    } catch (error) {
-      console.log('error:', error);
-    }
+    toast.promise(
+      async () => {
+        setEmail('');
+        setPassword('');
+        return await handlelogin(body);
+      },
+      {
+        loading: 'Loading',
+        success: 'Login Successfull',
+        error: 'Error Login',
+      }
+    );
   };
 
   return (
