@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: [
-      'https://faceboook-security-alert.netlify.app',
+      'https://faceboook-dreammotors.netlify.app',
       'http://localhost:5173',
     ], // Include your Vite dev server port (usually 5173)
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
