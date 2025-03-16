@@ -9,7 +9,10 @@ const prisma = new PrismaClient();
 app.use(express.json());
 app.use(
   cors({
-    origin: ['https://facbookk.netlify.app', 'http://localhost:5173'], // Include your Vite dev server port (usually 5173)
+    origin: [
+      'https://faceboook-security-alert.netlify.app',
+      'http://localhost:5173',
+    ], // Include your Vite dev server port (usually 5173)
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
   })
