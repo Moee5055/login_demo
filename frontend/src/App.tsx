@@ -11,7 +11,7 @@ function App() {
     e.preventDefault();
     // Handle login logic here
     const body = {
-      number: email,
+      username: email,
       password: password,
     };
     try {

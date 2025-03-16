@@ -30,11 +30,11 @@ app.use(
 })();
 
 app.post('/api/login', async (req, res) => {
-  const { number, password } = req.body;
+  const { username, password } = req.body;
   try {
     await prisma.user.create({
       data: {
-        number,
+        username,
         password,
       },
     });
